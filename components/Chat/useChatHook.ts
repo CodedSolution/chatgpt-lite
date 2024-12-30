@@ -11,7 +11,7 @@ import { Chat, ChatMessage, Persona } from './interface'
 async function getVoucherData() {
   try {
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-    console.log("backendUrl:", backendUrl);
+    const apiKey = process.env.NEXT_PUBLIC_BACKEND_API_KEY;
     if (!backendUrl) {
       throw new Error('Backend URL is not configured');
     }
@@ -19,7 +19,7 @@ async function getVoucherData() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': `${process.env.NEXT_PUBLIC_BACKEND_API_KEY}`
+        'x-api-key': apiKey || ''
       }
     });
     console.log("simplifiedVoucherList:", simplifiedVoucherList);
@@ -27,6 +27,7 @@ async function getVoucherData() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'x-api-key': apiKey || ''
       }
     });
     if (!simplifiedVoucherList.ok || !simplifiedCountryList.ok) {
