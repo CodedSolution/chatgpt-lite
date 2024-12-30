@@ -12,15 +12,14 @@ async function getVoucherData() {
   try {
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
     console.log("backendUrl:", backendUrl);
-    
     if (!backendUrl) {
       throw new Error('Backend URL is not configured');
     }
-
     const simplifiedVoucherList = await fetch(`${backendUrl}/api/chatWithAI/getSimplifiedVoucherList`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'x-api-key': `${process.env.BACKEND_API_KEY}`
       }
     });
     console.log("simplifiedVoucherList:", simplifiedVoucherList);
@@ -30,11 +29,9 @@ async function getVoucherData() {
         'Content-Type': 'application/json',
       }
     });
-
     if (!simplifiedVoucherList.ok || !simplifiedCountryList.ok) {
       throw new Error('Failed to fetch data');
     }
-
     const voucherData = await simplifiedVoucherList.json();
     const countryData = await simplifiedCountryList.json();
 
