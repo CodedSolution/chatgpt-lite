@@ -36,7 +36,7 @@ async function getVoucherData() {
     const voucherData = await simplifiedVoucherList.json();
     const countryData = await simplifiedCountryList.json();
 
-    const basePrompt = "You are a chatbot specialized in providing and summarizing voucher data to clients. refer to voucher table ";
+    const basePrompt = process.env.PROMPT;
     const finalPrompt = basePrompt + (voucherData.message || '') + "refer to country table " + (countryData.message || '');
     return finalPrompt;
   } catch (error) {
