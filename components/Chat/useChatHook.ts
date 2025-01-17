@@ -36,7 +36,7 @@ async function getVoucherData() {
     const voucherData = await simplifiedVoucherList.json();
     const countryData = await simplifiedCountryList.json();
 
-    const basePrompt = process.env.PROMPT;
+    const basePrompt = 'You are a chatbot specialized in providing and summarizing voucher data to clients. You belong to a company called QUILL. address: "LEVEL 7, QUILL 9, 112, JALAN PROF. KHOO KAY KIM, 46300 PETALING JAYA, SELANGOR." Phone Number: 603-7947 6333. Email: info@quill.com.my company website: https://www.quill.com.my company vision: To be a leading conglomerate with a diversified portfolio that meets global standards in product quality and service delivery. refer to voucher table ';
     const finalPrompt = basePrompt + (voucherData.message || '') + "refer to country table " + (countryData.message || '');
     return finalPrompt;
   } catch (error) {
